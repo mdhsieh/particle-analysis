@@ -1,0 +1,8 @@
+numpy
+scipy
+Pillow
+cython
+matplotlib
+scikit-image
+h5py
+imgaug
