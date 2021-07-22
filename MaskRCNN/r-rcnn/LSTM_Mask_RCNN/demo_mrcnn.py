@@ -63,7 +63,7 @@ class InferenceConfig(coco.CocoConfig):
 
     # Don't exclude based on confidence. Since we have two classes
     # then 0.5 is the minimum anyway as it picks between nucleus and BG
-    # DETECTION_MIN_CONFIDENCE = 0
+    DETECTION_MIN_CONFIDENCE = 0
 
     # Backbone network architecture
     # Supported values are: resnet50, resnet101
