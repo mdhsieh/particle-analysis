@@ -19,7 +19,11 @@ import time
 import utils.utils as utils
 import utils.visualize as visualize
 import coco
-import detection_module.detect_model as detectlib
+# import detection_module.detect_model as detectlib
+from mrcnn import model as modellib
+
+# used by NucleusConfig
+from mrcnn.config import Config
 
 # COCO Class names
 # Index of the class in the list is its ID. For example, to get ID of
@@ -43,14 +47,16 @@ if not os.path.exists(RESULT_DIR):
 	os.makedirs(RESULT_DIR)
 
 
-class InferenceConfig(coco.CocoConfig):
+# class InferenceConfig(coco.CocoConfig):
 # 	# Set batch size to 1 since we'll be running inference on
 # 	# one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
 # 	GPU_COUNT = 1
 # 	IMAGES_PER_GPU = 1
 # 	IMAGE_MIN_DIM = 480
 # 	IMAGE_MAX_DIM = 640
-    # Use NucleusInferenceConfig from https://github.com/matterport/Mask_RCNN/tree/master/samples/nucleus/nucleus.py
+
+# Use NucleusConfig from https://github.com/matterport/Mask_RCNN/tree/master/samples/nucleus/nucleus.py
+class NucleusConfig(Config):
 	# Configuration for training on the nucleus segmentation dataset.
     # Give the configuration a recognizable name
     NAME = "nucleus"
@@ -110,12 +116,27 @@ class InferenceConfig(coco.CocoConfig):
 
     # Max number of final detections per image
     DETECTION_MAX_INSTANCES = 400
+    
+# Use NucleusInferenceConfig from https://github.com/matterport/Mask_RCNN/tree/master/samples/nucleus/nucleus.py
+class NucleusInferenceConfig(NucleusConfig):
+    # Set batch size to 1 to run one image at a time
+    GPU_COUNT = 1
+    IMAGES_PER_GPU = 1
+    # Don't resize imager for inferencing
+    IMAGE_RESIZE_MODE = "pad64"
+    # Non-max suppression threshold to filter RPN proposals.
+    # You can increase this during training to generate more propsals.
+    RPN_NMS_THRESHOLD = 0.7
 
-config = InferenceConfig()
+# config = InferenceConfig()
+# Replace InferenceConfig with NucleusInferenceConfig
+config = NucleusInferenceConfig()
 config.display()
 
 # Create model object in inference mode.
-model = detectlib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
+# model = detectlib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
+# Replace detectlib with modellib
+model = modellib.MaskRCNN(mode="inference", config=config, model_dir=MODEL_DIR)
 # Load weights trained on MS-COCO
 # model.load_weights(COCO_MODEL_PATH, by_name=True)
 model.load_weights(COCO_MODEL_PATH, by_name=True, exclude=[ "mrcnn_class_logits", "mrcnn_bbox_fc", "mrcnn_bbox", "mrcnn_mask"])
