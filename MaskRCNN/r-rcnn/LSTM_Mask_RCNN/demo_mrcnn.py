@@ -23,10 +23,11 @@ print("root dir:", ROOT_DIR)
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
-from mrcnn import utils
-from mrcnn import visualize
-from mrcnn.visualize import display_images
-import mrcnn.model as modellib
+# from mrcnn import utils
+# from mrcnn import visualize
+# from mrcnn.visualize import display_images
+# import mrcnn.model as modellib
+import detection_module.detect_model as detectlib
 from mrcnn.model import log
 
 # to read image only
@@ -41,6 +42,14 @@ DATASET_DIR = os.path.join(ROOT_DIR, "demo_video_nucleus/frames")
 # Inference Configuration
 config = nucleus.NucleusInferenceConfig()
 config.display()
+# NucleusInferenceConfig has no attribute 'BACKBONE_SHAPES' or 'IMAGE_PADDING'
+# add backbone shape from demo_rrcnn.py
+config.BACKBONE_SHAPES = np.array( 
+            [[int(math.ceil(config.IMAGE_SHAPE[0] / stride)),
+              int(math.ceil(config.IMAGE_SHAPE[1] / stride))]
+             for stride in config.BACKBONE_STRIDES])
+# add image padding from detection_module/detect_config.py
+config.IMAGE_PADDING = True
 
 # Device to load the neural network on.
 DEVICE = "/cpu:0"  # /cpu:0 or /gpu:0
@@ -52,7 +61,7 @@ TEST_MODE = "inference"
 
 # Create model in inference mode
 with tf.device(DEVICE):
-    model = modellib.MaskRCNN(mode="inference",
+    model = detectlib.MaskRCNN(mode="inference", # modellib.MaskRCNN(mode="inference",
                               model_dir=LOGS_DIR,
                               config=config)
 

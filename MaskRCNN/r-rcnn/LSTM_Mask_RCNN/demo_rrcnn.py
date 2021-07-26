@@ -6,6 +6,7 @@ Copyright (c) 2018 Chen-En Chung
 Licensed under the MIT License (see LICENSE for details)
 Written by Chen-En, Chung
 """
+'''
 import os
 import sys
 import random
@@ -251,9 +252,9 @@ if __name__ == '__main__':
 	buildLSTM_time = time.time() - buildLSTM_start
 
 	demo()
+'''
 
 # new script using nucleus.py from https://github.com/matterport/Mask_RCNN/tree/master/samples/nucleus
-'''
 import os
 import sys
 import random
@@ -266,8 +267,11 @@ import matplotlib.pyplot as plt
 
 import utils.utils as utils
 import utils.visualize as visualize
+# from mrcnn import utils
+# from mrcnn import visualize
 import coco
 import detection_module.detect_model as detectlib
+# import mrcnn.model as modellib
 import tracking_module.track_config as trackconfig
 import tracking_module.track_model as tracklib
 
@@ -283,8 +287,10 @@ coco_names = ['BG', 'cell']
 
 # Root directory of the project
 ROOT_DIR = os.getcwd()
+print("root dir:", ROOT_DIR)
 # Path to trained weights file
-COCO_MODEL_PATH = os.path.join(ROOT_DIR, "kaggle_bowl.h5")
+# COCO_MODEL_PATH = os.path.join(ROOT_DIR, "kaggle_bowl.h5")
+weights_path = os.path.join(ROOT_DIR, "kaggle_bowl.h5")
 # Path to LSTM Model weights
 LSTM_MODEL_PATH = os.path.join(ROOT_DIR, "RRCNN_OTB+.h5")
 # Directory to save logs and trained model
@@ -292,7 +298,7 @@ MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 # Directory to root of dataset
 DATASET_DIR = os.path.join(ROOT_DIR, "OTB")
 # Directory of video frames to run tracking on
-IMAGE_DIR = os.path.join(ROOT_DIR, "demo_video_nucleus", "frames", "stage1_test", "0000", "images")
+IMAGE_DIR = os.path.join(ROOT_DIR, "demo_video_nucleus", "frames")
 # Path to 1st frames annotation
 ANNO_PATH = os.path.join(ROOT_DIR, "demo_video_nucleus", "annotation.txt")
 # Path to 1st frames class id
@@ -302,13 +308,13 @@ RESULT_DIR = os.path.join(ROOT_DIR, "rrcnn_result")
 if not os.path.exists(RESULT_DIR):
 	os.makedirs(RESULT_DIR)
 
-class InferenceConfig(coco.CocoConfig):
-    # Set batch size to 1 since we'll be running inference on
-    # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
-    GPU_COUNT = 1
-    IMAGES_PER_GPU = 1
-    IMAGE_MIN_DIM = 480
-    IMAGE_MAX_DIM = 640
+# class InferenceConfig(coco.CocoConfig):
+#     # Set batch size to 1 since we'll be running inference on
+#     # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
+#     GPU_COUNT = 1
+#     IMAGES_PER_GPU = 1
+#     IMAGE_MIN_DIM = 480
+#     IMAGE_MAX_DIM = 640
 
 class LSTMInferenceConfig(trackconfig.Config):
 	# One frame per batch for inference
@@ -474,10 +480,10 @@ if __name__ == '__main__':
             [[int(math.ceil(config.IMAGE_SHAPE[0] / stride)),
               int(math.ceil(config.IMAGE_SHAPE[1] / stride))]
              for stride in config.BACKBONE_STRIDES])
-	# Create model object in inference mode.
-	model = detectlib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
+	config.IMAGE_PADDING = True # from detection_module/detect_config.py # Create model object in inference mode.
+	model = detectlib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config) # model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
 	# Load weights trained on MS-COCO
-	model.load_weights(COCO_MODEL_PATH, by_name=True)
+	model.load_weights(weights_path, by_name=True)
 
 	############################################################
 	#  LSTM setting
@@ -491,4 +497,3 @@ if __name__ == '__main__':
 	buildLSTM_time = time.time() - buildLSTM_start
 
 	demo()
-'''
