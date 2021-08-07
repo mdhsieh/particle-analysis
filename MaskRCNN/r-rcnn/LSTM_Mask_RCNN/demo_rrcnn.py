@@ -346,10 +346,12 @@ def demo():
 		print("Image name: %s" % (img_name))
 		# Using annotation for 1st frame  
 		if idx == 0:
-			anno_bbox = np.genfromtxt(ANNO_PATH, delimiter=',') # [y, x, w, h]
-			# Keep as last frame info.
-			last_bbox = utils.bbox_toyxyx(bbox=anno_bbox) # [y1, x1, y2, x2]
-			last_bbox = utils.bbox_denormalization(bbox=last_bbox, H=H, W=W) # [0, H]
+			# anno_bbox = np.genfromtxt(ANNO_PATH, delimiter=',') # [y, x, w, h]
+			# # Keep as last frame info.
+			# last_bbox = utils.bbox_toyxyx(bbox=anno_bbox) # [y1, x1, y2, x2]
+			# last_bbox = utils.bbox_denormalization(bbox=last_bbox, H=H, W=W) # [0, H]
+			last_bbox = np.genfromtxt(ANNO_PATH, delimiter=',') # [y, x, w, h]
+			print("1st frame bbox from annotations.txt:", last_bbox)
 			last_feat = np.zeros((trackconfig.FEATURE_SIZE, ))
 
 		# MRCNN detects until reach TIME_STEPS
