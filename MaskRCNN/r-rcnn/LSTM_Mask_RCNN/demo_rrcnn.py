@@ -298,11 +298,11 @@ MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 # Directory to root of dataset
 DATASET_DIR = os.path.join(ROOT_DIR, "OTB")
 # Directory of video frames to run tracking on
-IMAGE_DIR = os.path.join(ROOT_DIR, "demo_video_nucleus", "frames")
+IMAGE_DIR = os.path.join(ROOT_DIR, "demo_video_nucleus_blocked", "frames")
 # Path to 1st frames annotation
-ANNO_PATH = os.path.join(ROOT_DIR, "demo_video_nucleus", "annotation.txt")
+ANNO_PATH = os.path.join(ROOT_DIR, "demo_video_nucleus_blocked", "annotation.txt")
 # Path to 1st frames class id
-CLASSID_PATH = os.path.join(ROOT_DIR, "demo_video_nucleus", "coco_id.txt")
+CLASSID_PATH = os.path.join(ROOT_DIR, "demo_video_nucleus_blocked", "coco_id.txt")
 # Directory to save image results
 RESULT_DIR = os.path.join(ROOT_DIR, "rrcnn_result")
 if not os.path.exists(RESULT_DIR):
