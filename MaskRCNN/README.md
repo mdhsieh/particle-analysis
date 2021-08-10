@@ -36,7 +36,7 @@ utils/visualize.py, line 537 replace font = 	ImageFont.truetype('/Library/Fonts/
 https://stackoverflow.com/questions/47694421/pil-issue-oserror-cannot-open-resource 
 
 ##### Request GPU node
-demo_rrcnn.py requires GPU.
+`demo_rrcnn.py` requires GPU.
 ```
 srun -p gpu --gres=gpu --pty /bin/bash
 ```
