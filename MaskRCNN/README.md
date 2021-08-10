@@ -29,10 +29,10 @@ pip install h5py==2.10.0
 
 Change lines:
 
-detection_module/detect_model.py, lines 2054, 2076, 2079 replace the "topology" with "saving".
+`detection_module/detect_model.py`, lines 2054, 2076, 2079 replace the "topology" with "saving".
 https://github.com/matterport/Mask_RCNN/issues/694 
 
-utils/visualize.py, line 537 replace font = 	ImageFont.truetype('/Library/Fonts/Arial.ttf', 15) to font = ImageFont.load_default()
+`utils/visualize.py`, line 537 replace `font = 	ImageFont.truetype('/Library/Fonts/Arial.ttf', 15)` to `font = ImageFont.load_default()`
 https://stackoverflow.com/questions/47694421/pil-issue-oserror-cannot-open-resource 
 
 ##### Request GPU node
