@@ -36,6 +36,7 @@ utils/visualize.py, line 537 replace font = 	ImageFont.truetype('/Library/Fonts/
 https://stackoverflow.com/questions/47694421/pil-issue-oserror-cannot-open-resource 
 
 ##### Request GPU node
+demo_rrcnn.py requires GPU.
 ```
 srun -p gpu --gres=gpu --pty /bin/bash
 ```
@@ -52,3 +53,5 @@ Run detection with tracking on `demo_video_nucleus_blocked/frames`:
 ### Run using Google Colab
 Run `lstm_mask_rcnn_train_and_inference.ipynb`, which runs `demo_mrcnn.py` on images in `demo_video_nucleus/frames`.
 When using Colab, restart the runtime after pip installations to avoid some errors.
+
+Change runtime to GPU to run `demo_rrcnn.py`. 
