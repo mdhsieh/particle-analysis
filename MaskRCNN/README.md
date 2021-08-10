@@ -50,6 +50,8 @@ Run detection without tracking on `demo_video_nucleus/frames`:
 Run detection with tracking on `demo_video_nucleus_blocked/frames`:
 `python demo_rrcnn.py`
 
+The results are in `mrcnn_results` and `rrcnn_results` folders, respectively.
+
 ### Run using Google Colab
 Run `lstm_mask_rcnn_train_and_inference.ipynb`, which runs `demo_mrcnn.py` on images in `demo_video_nucleus/frames`.
 When using Colab, restart the runtime after pip installations to avoid some errors.
