@@ -11,6 +11,7 @@ LSTM uses [this Object Tracking Benchmark weight](https://drive.google.com/file/
 
 ### Run on HPC
 ##### To run on SJSU HPC after logging in
+First `git clone` this repository and download the trained weights into HPC.
 ```
 # create a virtual environment and activate
 module load python3/3.7.0 cuda/10.0
