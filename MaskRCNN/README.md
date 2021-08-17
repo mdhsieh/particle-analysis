@@ -34,7 +34,7 @@ pip install keras==2.3.1
 pip install h5py==2.10.0
 ```
 
-Change lines:
+Some lines were changed:
 
 `detection_module/detect_model.py`, lines 2054, 2076, 2079 replace the "topology" with "saving".
 https://github.com/matterport/Mask_RCNN/issues/694 
