@@ -1,8 +1,11 @@
 ## Development Instructions
 
-Mask R-CNN with LSTM is in `r-rcnn` folder.
+Mask R-CNN with LSTM is in `r-rcnn/LSTM_Mask_RCNN` folder.
 This is from the [Recurrent Mask R-CNN repository](https://github.com/cechung/R-RCNN),
 which is based off the [Matterport implementation](https://github.com/matterport/Mask_RCNN) of Mask-RCNN.
+
+It is input 1 image from `LSTM_Mask_RCNN/demo_video_nucleus/frames` and outputs bounding boxes of cells in the image, as well as tracks 1 cell given its first image box
+coordinates `y1, x1, y2, x2` in `LSTM_Mask_RCNN/demo_video_nucleus/annotations.txt`.
 
 ### Download trained weights
 Download these 2 weights and place inside `r-rcnn` folder:
@@ -61,3 +64,11 @@ Run `lstm_mask_rcnn_train_and_inference.ipynb`, which runs `demo_mrcnn.py` on im
 When using Colab, restart the runtime after pip installations to avoid some errors.
 
 Change runtime to GPU to run `demo_rrcnn.py`. 
+
+##### Other folders
+The other folders `matterport` and `detectron2` are unused and separate from `r-rcnn`. They are only for reference if needed.
+
+`matterport` is from the [Matterport implementation](https://github.com/matterport/Mask_RCNN) of Mask-RCNN which uses `nucleus.py` to do training and image segmentation of [the Kaggle dataset](https://www.kaggle.com/c/data-science-bowl-2018).
+
+`detectron2` is a Colab script using [this Fluo-N2DH-SIM+ training dataset](http://celltrackingchallenge.net/2d-datasets/) and
+the [Detectron2 implementation](https://github.com/facebookresearch/detectron2) of Mask-RCNN.
