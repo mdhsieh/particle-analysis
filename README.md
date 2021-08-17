@@ -1,7 +1,7 @@
 # particle-analysis
 
 Models which were selected to perform object detection and tracking of indoor disinfectant particles or microscope images.
-Each top-level folder has 1 separate model: Mask-RCNN, U-Net, and PointRNN. 
+Each top-level folder has scripts based off 1 model: Mask-RCNN, U-Net, and PointRNN. Models are separate from each other.
 
 - Mask R-CNN: Bounding box detection and image segmentation of microscope images
 - U-Net: Image segmentation of microscope images
