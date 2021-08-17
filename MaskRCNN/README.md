@@ -65,7 +65,7 @@ When using Colab, restart the runtime after pip installations to avoid some erro
 
 Change runtime to GPU to run `demo_rrcnn.py`. 
 
-##### Other folders
+### Other folders
 The other folders `matterport` and `detectron2` are unused and separate from `r-rcnn`. They are only for reference if needed.
 
 `matterport` is from the [Matterport implementation](https://github.com/matterport/Mask_RCNN) of Mask-RCNN which uses `nucleus.py` to do training and image segmentation of [the Kaggle dataset](https://www.kaggle.com/c/data-science-bowl-2018).
