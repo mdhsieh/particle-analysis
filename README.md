@@ -7,6 +7,7 @@ Each top-level folder has scripts based off 1 model: Mask-RCNN, U-Net, and Point
 - U-Net: Image segmentation of microscope images
 - PointRNN: Point cloud object detection and tracking
 
+### Mask-RCNN
 The `MaskRCNN/r-rcnn` folder performs detection on multiple cell nuclei and tracking on a single cell nucleus.
 It was trained on [this dataset](https://www.kaggle.com/c/data-science-bowl-2018/data).
 
